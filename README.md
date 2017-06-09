@@ -2,6 +2,8 @@
 
 基于webpack搭建纯静态页面型前端工程解决方案模板。支持es6
 
+### 拷贝项目模板
+	$ git clone https://github.com/leonxiao007/webpack-gulp.git
 
 ### 安装软件
 
@@ -42,6 +44,7 @@ $ cd webpack-gulp && npm install
 ├── mock/                                # 假数据文件
 ├── package.json                         # 项目配置
 ├── README.md                            # 项目说明
+├── .babelrc                             # babel配置
 ├── server                               # 本地server
 │   ├── app.js                           # 本地server入口
 │   ├── home.html                        # 列出项目所有入口文件
@@ -89,7 +92,7 @@ $ npm run start-release
 
 ### 部署&发布
 
-纯静态页面型的应用，最简单的做法是直接把`assets`文件夹部署到指定机器即可（先配置好机器ip、密码、上传路径等信息【如果是OSS则省略】）：
+纯静态页面型的应用，最简单的做法是直接把`dist`文件夹部署到指定机器即可（先配置好机器ip、密码、上传路径等信息【如果是OSS则省略】）：
 
 ``` js
 $ npm run deploy # or run `gulp deploy`
