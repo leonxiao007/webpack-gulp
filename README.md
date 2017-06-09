@@ -48,15 +48,14 @@ $ cd webpack-gulp && npm install
 ├── src                                  # 源码目录
 │   ├── index.html                       # 入口文件index
 │   ├── css/                             # css资源
-│   ├── img/                             # 图片资源
+│   ├── images/                          # 图片资源
 │   ├── js                               # js&jsx资源
 │   │   ├── index.js                     # index页面入口
 │   │   ├── components/                  # 组件
 │   │   ├── lib/                         # 没有存放在npm的第三方库或者下载存放到本地的基础库，如jQuery、Zepto、React等
 │   │   └── utils/                       # 业务无关的辅助工具
 │   ├── scss/                            # scss资源
-│   ├── pathmap.json                     # 手动配置某些模块的路径，可以加快webpack的编译速度
-│   └── tmpl/                            # 模板目录，如果是React的项目这个可以删掉
+│   └── pathmap.json                     # 手动配置某些模块的路径，可以加快webpack的编译速度
 ├── configs                              # webpack 配置
 └── ├── webpack.base.config.js           # 基本配置
     ├── webpack.dev.config.js            # 开发环境
