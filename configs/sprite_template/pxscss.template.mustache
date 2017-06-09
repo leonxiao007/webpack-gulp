@@ -1,0 +1,19 @@
+{{#extend "scss"}}
+{{#content "sprites"}}
+{{#each sprites}}
+.{{name}} {
+    width:{{width}}px;
+    height:{{height}}px;
+    background-position: {{offset_x}}px {{offset_y}}px;
+}
+{{/each}}
+{{/content}}
+
+{{#content "spritesheet"}}
+{{#each sprites}}.{{strings.name}}, {{/each}}{
+    background-image: url('{{{spritesheet.escaped_image}}}');
+    background-repeat: no-repeat;
+    background-size: {{spritesheet.width}}px {{spritesheet.height}}px;
+}
+{{/content}}
+{{/extend}}
