@@ -62,8 +62,8 @@ $ cd webpack-gulp && npm install
 └── ├── webpack.base.config.js           # 基本配置
     ├── webpack.dev.config.js            # 开发环境
     └── webpack.prod.config.js           # 生产环境
-		├── pxscss.template.mustache.js  # 图片精灵css 单位为px
-    	└── remscss.template.mustache.js # 图片精灵css 单位为rem
+        ├── pxscss.template.mustache.js  # 图片精灵css 单位为px
+        └── remscss.template.mustache.js # 图片精灵css 单位为rem
 
 ```
 
