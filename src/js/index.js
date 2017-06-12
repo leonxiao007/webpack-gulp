@@ -1,6 +1,5 @@
 "use strict";
 require('../scss/index.scss');
-require('../scss/sprites/mc.scss');
 var Url = require('./utils/url.js');
 require('zepto');
 // es6

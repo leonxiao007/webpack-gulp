@@ -17,18 +17,36 @@ $ cd webpack-gulp && npm install
 ```
 
 ### 启动本地开发服务器
+  $ npm run start
 
-- 不支持es6
 
-    ``` bash
-    $ npm run start
-    ```
+### 自定义配置
+##### ./configs/custom.config.js
+``` js
+  // 是否开启es6语法
+  es6         : false,
+  /**
+   * 需要合并成雪碧图的文件夹列表 路径为(src/images/*)
+   * 雪碧图排列属性
+   *     -> algorithm 默认为 "binary-tree"
+   *         -> [top-down left-right diagonal alt-diagonal binary-tree]
+   */
+  sprites     : [
+    {
+      folderName: 'sprite',     // 文件夹名
+      algorithm : ''            // 雪碧图排列方式 默认为 binary-tree
+    }
+  ],
 
-- 支持es6语法
+  // 图片文件大小小于该参数时自动转成base64(以字节为单位)
+  limitBase64 : '10000',
 
-    ``` bash
-    $ npm run start-es6
-    ```
+  // 用到什么公共lib（例如React.js），就把它加进vender去，目的是将公用库单独提取打包
+  vender      : ['zepto']
+
+```
+
+
 
 ### 业务开发
 
@@ -47,17 +65,18 @@ $ cd webpack-gulp && npm install
 │   └── routes.js                        # 本地路由配置
 ├── src                                  # 源码目录
 │   ├── index.html                       # 入口文件index
-│   ├── css/                             # css资源
 │   ├── images/                          # 图片资源
+│   ├── css/                             # css资源
+│   ├── scss/                            # scss资源
 │   ├── js                               # js&jsx资源
 │   │   ├── index.js                     # index页面入口
 │   │   ├── components/                  # 组件
 │   │   ├── lib/                         # 没有存放在npm的第三方库或者下载存放到本地的基础库，如jQuery、Zepto、React等
 │   │   └── utils/                       # 业务无关的辅助工具
-│   ├── scss/                            # scss资源
 │   └── pathmap.json                     # 手动配置某些模块的路径，可以加快webpack的编译速度
 ├── configs                              # webpack 配置
-└── ├── webpack.base.config.js           # 基本配置
+└── ├── custom.config.js                 # 自定义参数
+    ├── webpack.base.config.js           # 基本配置
     ├── webpack.dev.config.js            # 开发环境
     └── webpack.prod.config.js           # 生产环境
         ├── pxscss.template.mustache.js  # 图片精灵css 单位为px

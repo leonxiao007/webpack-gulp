@@ -9,35 +9,15 @@
 //
 // At the bottom of this section, we provide information about the spritesheet itself
 // $spritesheet: width height image $spritesheet-sprites;
-.sprite-a1 {
-    width:96px;
-    height:299px;
-    background-position: 0px -273px;
-}
-.sprite-a2 {
-    width:96px;
-    height:241px;
-    background-position: -297px -273px;
-}
-.sprite-a3 {
-    width:96px;
-    height:273px;
-    background-position: -99px -273px;
-}
-.sprite-a4 {
-    width:96px;
-    height:269px;
-    background-position: -198px -273px;
-}
 .sprite-webpack {
     width:497px;
     height:270px;
     background-position: 0px 0px;
 }
-.sprite-a1, .sprite-a2, .sprite-a3, .sprite-a4, .sprite-webpack, {
+.sprite-webpack, {
     background-image: url('../../images/sprite.png');
     background-repeat: no-repeat;
-    background-size: 497px 572px;
+    background-size: 497px 270px;
 }
 
 

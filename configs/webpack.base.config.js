@@ -20,8 +20,8 @@ const srcDir = path.resolve(process.cwd(), 'src');
 const assets = path.resolve(process.cwd(), 'dist');
 const nodeModPath = path.resolve(__dirname, '../node_modules');
 const pathMap = require('../src/pathmap.json');
-
-
+// 自定义配置
+const customConfig = require('./custom.config');
 
 /**
  * 需要合并成雪碧图的文件夹列表 路径为(src/images/*)
@@ -29,7 +29,7 @@ const pathMap = require('../src/pathmap.json');
  *     -> algorithm 默认为 "binary-tree"
  *         -> [top-down left-right diagonal alt-diagonal binary-tree]
  */
-const sprites = [
+/*const sprites = [
     {
         folderName: 'sprite',     // 文件夹名
         algorithm : ''            // 雪碧图排列方式 默认为 binary-tree
@@ -39,7 +39,9 @@ const sprites = [
         folderName: 'mc',         // 文件夹名
         algorithm : 'left-right'  // 雪碧图排列方式
     }
-];
+];*/
+
+const sprites = customConfig.sprites;
 
 
 let entries = (() => {
@@ -156,7 +158,8 @@ module.exports = (options) => {
                 // 目标小图标
                 src: {
                     cwd: './src/images/'+ _sprite.folderName,
-                    glob: '*.png'
+                    //glob: ['*.png', '*.jpg']
+                    glob: '*'
                 },
                 // 输出雪碧图文件及样式文件
                 /*target: {
@@ -197,14 +200,14 @@ module.exports = (options) => {
             loaders: [
                 // url-loader更好用，小于10KB的图片会自动转成dataUrl，
                 // 否则则调用file-loader，参数直接传入
-                'url?limit=10000&name=img/[name].[ext]?[hash:8]',
+                'url?limit='+ customConfig.limitBase64 +'&name=img/[name].[ext]?[hash:8]',
                 'image?{bypassOnDebug:true, progressive:true,optimizationLevel:3,pngquant:{quality:"65-80",speed:4}}'
             ],
         },
         // 文件小于10KB 转成base64
         {
             test: /\.((ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9]))|(ttf|eot)$/,
-            loader: 'url?limit=10000&name=fonts/[name].[ext]?[hash:8]'
+            loader: 'url?limit='+ customConfig.limitBase64 +'&name=fonts/[name].[ext]?[hash:8]'
         },
         //{test: /\.(tpl|ejs)$/, loader: 'ejs'},
         {test: /\.css$/, loader: cssLoader},
@@ -222,14 +225,18 @@ module.exports = (options) => {
     ]
 
     // 是否要支持es6语法
-    if(env === 'es6') _loaders.push({test: /\.js$/, loader: 'babel'});
+    if(customConfig.es6) _loaders.push({test: /\.js$/, loader: 'babel'});
+
+    if(customConfig.vender && customConfig.vender.length){
+        Object.assign(entries, {
+            // 用到什么公共lib（例如React.js），就把它加进vender去，目的是将公用库单独提取打包
+            'vender': customConfig.vender,
+            // 'reactStuff': 'assets/dll/js/reactStuff.js'
+        })
+    }
 
     let config = {
-        entry: Object.assign(entries, {
-            // 用到什么公共lib（例如React.js），就把它加进vender去，目的是将公用库单独提取打包
-            'vender': ['zepto'],
-            // 'reactStuff': 'assets/dll/js/reactStuff.js'
-        }),
+        entry: entries,
 
         output: {
             path: assets,
