@@ -88,8 +88,22 @@ app.use(serve(staticDir, {
 
 app = http.createServer(app.callback())
 
-app.listen(pkg.localServer.port, '127.0.0.1', () => {
-    let url = util.format('http://%s:%d', 'localhost', pkg.localServer.port)
+// 获取本机IP
+function getIPAdress(){
+    var interfaces = require('os').networkInterfaces();
+    for(var devName in interfaces){
+          var iface = interfaces[devName];
+          for(var i=0;i<iface.length;i++){
+               var alias = iface[i];
+               if(alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal){
+                     return alias.address;
+               }
+          }
+    }
+}
+let localIp = getIPAdress();
+app.listen(pkg.localServer.port, localIp, () => {
+    let url = util.format('http://%s:%d', localIp, pkg.localServer.port)
     console.log('Listening at %s', url)
     open(url)
 })

@@ -1,4 +1,7 @@
 module.exports = {
+	localPath   : '/',// 本地发布路径
+	prodPath    : 'http://cdn...', // 线上发布路径
+
 	// 是否开启es6语法
 	es6         : false,
 	/**
@@ -18,5 +21,5 @@ module.exports = {
 	limitBase64 : '10000',
 
 	// 用到什么公共lib（例如React.js），就把它加进vender去，目的是将公用库单独提取打包
-	vender      : ['zepto']
+	//vender      : ['zepto']
 }

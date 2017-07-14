@@ -65,7 +65,7 @@ module.exports = (options) => {
 
     let dev = options.dev !== undefined ? options.dev : true
     // 这里publicPath要使用绝对路径，不然scss/css最终生成的css图片引用路径是错误的，应该是scss-loader的bug
-    let publicPath = '/'
+    let publicPath = dev ? customConfig.localPath : customConfig.prodPath;
     let extractCSS
     let cssLoader
     let sassLoader
